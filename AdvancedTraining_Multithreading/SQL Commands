@@ -1,0 +1,447 @@
+			SQL QUERIES
+
+
+
+
+ select first_name || ' ' || last_name as "Full Name" From employees;
+ 
+Full Name
+----------------------------------------------
+Jose Manuel Urman
+Peter Vargas
+Clara Vishney
+Shanta Vollman
+Alana Walsh
+Matthew Weiss
+Jennifer Whalen
+Eleni Zlotkey
+
+
+
+ 
+ 
+select first_name || ' is a ' || job_id AS "Employee and it's Job" from employees;
+
+Employee and it's Job
+------------------------------------
+Ellen is a SA_REP
+Sundar is a SA_REP
+Mozhe is a ST_CLERK
+David is a IT_PROG
+Hermann is a PR_REP
+Shelli is a PU_CLERK
+Amit is a SA_REP
+Elizabeth is a SA_REP
+Sarah is a SH_CLERK
+David is a SA_REP
+Laura is a ST_CLERK
+
+
+
+
+
+SQL> select department_name || q'[ Department's Manager Id: ]'
+  2  || manager_id AS "Department and Manager" from departments;
+
+Department and Manager
+--------------------------------------------------------------------------------
+Administration Department's Manager Id: 200
+Marketing Department's Manager Id: 201
+Purchasing Department's Manager Id: 114
+Human Resources Department's Manager Id: 203
+Shipping Department's Manager Id: 121
+IT Department's Manager Id: 103
+Public Relations Department's Manager Id: 204
+Sales Department's Manager Id: 145
+Executive Department's Manager Id: 100
+Finance Department's Manager Id: 108
+Accounting Department's Manager Id: 205
+
+
+
+
+
+
+SQL> select distinct job_id from employees;
+
+JOB_ID
+----------
+AC_ACCOUNT
+AC_MGR
+AD_ASST
+AD_PRES
+AD_VP
+FI_ACCOUNT
+FI_MGR
+HR_REP
+IT_PROG
+MK_MAN
+MK_REP
+
+
+
+
+
+
+SQL> select employee_id, first_name, salary from employees where department_id=100;
+
+EMPLOYEE_ID FIRST_NAME		     SALARY
+----------- -------------------- ----------
+	108 Nancy		      12008
+	109 Daniel		       9000
+	110 John		       8200
+	111 Ismael		       7700
+	112 Jose Manuel 	       7800
+	113 Luis		       6900
+
+
+
+
+
+
+SQL> select employee_id, first_name, last_name from employees where job_id='SH_CLERK';
+
+EMPLOYEE_ID FIRST_NAME		 LAST_NAME
+----------- -------------------- -------------------------
+	180 Winston		 Taylor
+	181 Jean		 Fleaur
+	182 Martha		 Sullivan
+	183 Girard		 Geoni
+	184 Nandita		 Sarchand
+	185 Alexis		 Bull
+	186 Julia		 Dellinger
+	187 Anthony		 Cabrio
+	188 Kelly		 Chung
+	189 Jennifer		 Dilly
+	190 Timothy		 Gates
+
+EMPLOYEE_ID FIRST_NAME		 LAST_NAME
+----------- -------------------- -------------------------
+	191 Randall		 Perkins
+	192 Sarah		 Bell
+	193 Britney		 Everett
+	194 Samuel		 McCain
+	195 Vance		 Jones
+	196 Alana		 Walsh
+	197 Kevin		 Feeney
+	198 Donald		 OConnell
+	199 Douglas		 Grant
+
+
+
+
+
+SQL> select employee_id, first_name, salary from employees where salary >= 5000;
+
+EMPLOYEE_ID FIRST_NAME		     SALARY
+----------- -------------------- ----------
+	100 Steven		      24000
+	101 Neena		      17000
+	102 Lex 		      17000
+	103 Alexander		       9000
+	104 Bruce		       6000
+	108 Nancy		      12008
+	109 Daniel		       9000
+	110 John		       8200
+	111 Ismael		       7700
+	112 Jose Manuel 	       7800
+	113 Luis		       6900
+
+
+
+
+
+
+SQL> select employee_id, first_name, salary from employees where first_name LIKE 'S%';
+
+EMPLOYEE_ID FIRST_NAME		     SALARY
+----------- -------------------- ----------
+	166 Sundar		       6400
+	116 Shelli		       2900
+	192 Sarah		       4000
+	205 Shelley		      12008
+	100 Steven		      24000
+	173 Sundita		       6100
+	128 Steven		       2200
+	203 Susan		       6500
+	194 Samuel		       3200
+	161 Sarath		       7000
+	138 Stephen		       3200
+
+
+
+
+
+SQL> select employee_id, first_name, salary from employees where first_name LIKE '%n';
+
+EMPLOYEE_ID FIRST_NAME		     SALARY
+----------- -------------------- ----------
+	100 Steven		      24000
+	110 John		       8200
+	114 Den 		      11000
+	119 Karen		       2500
+	124 Kevin		       5800
+	128 Steven		       2200
+	133 Jason		       3300
+	138 Stephen		       3200
+	139 John		       2700
+	145 John		      14000
+	146 Karen		      13500
+
+EMPLOYEE_ID FIRST_NAME		     SALARY
+----------- -------------------- ----------
+	158 Allan		       9000
+	169 Harrison		      10000
+	174 Ellen		      11000
+	176 Jonathon		       8600
+	180 Winston		       3200
+	181 Jean		       3100
+	197 Kevin		       3000
+	203 Susan		       6500
+	204 Hermann		      10000
+
+
+
+
+
+
+
+
+SQL> select employee_id, first_name, salary from employees where first_name LIKE '___';
+
+EMPLOYEE_ID FIRST_NAME		     SALARY
+----------- -------------------- ----------
+	102 Lex 		      17000
+	114 Den 		      11000
+	118 Guy 		       2600
+	202 Pat 		       6000
+
+
+
+
+
+
+
+SQL> select employee_id, first_name, salary from employees where commission_pct is null;
+
+EMPLOYEE_ID FIRST_NAME		     SALARY
+----------- -------------------- ----------
+	100 Steven		      24000
+	101 Neena		      17000
+	102 Lex 		      17000
+	103 Alexander		       9000
+	104 Bruce		       6000
+	105 David		       4800
+	106 Valli		       4800
+	107 Diana		       4200
+	108 Nancy		      12008
+	109 Daniel		       9000
+	110 John		       8200
+
+
+
+
+
+
+
+
+SQL> select first_name, job_id, salary from employees where job_id='SA_REP' OR job_id='AD_PRES' and salary>15000;
+
+FIRST_NAME	     JOB_ID	    SALARY
+-------------------- ---------- ----------
+Steven		     AD_PRES	     24000
+Peter		     SA_REP	     10000
+David		     SA_REP	      9500
+Peter		     SA_REP	      9000
+Christopher	     SA_REP	      8000
+Nanette 	     SA_REP	      7500
+Oliver		     SA_REP	      7000
+Janette 	     SA_REP	     10000
+Patrick 	     SA_REP	      9500
+Allan		     SA_REP	      9000
+Lindsey 	     SA_REP	      8000
+
+FIRST_NAME	     JOB_ID	    SALARY
+-------------------- ---------- ----------
+Louise		     SA_REP	      7500
+Sarath		     SA_REP	      7000
+Clara		     SA_REP	     10500
+Danielle	     SA_REP	      9500
+Mattea		     SA_REP	      7200
+David		     SA_REP	      6800
+Sundar		     SA_REP	      6400
+Amit		     SA_REP	      6200
+Lisa		     SA_REP	     11500
+Harrison	     SA_REP	     10000
+Tayler		     SA_REP	      9600
+
+FIRST_NAME	     JOB_ID	    SALARY
+-------------------- ---------- ----------
+William 	     SA_REP	      7400
+Elizabeth	     SA_REP	      7300
+Sundita 	     SA_REP	      6100
+Ellen		     SA_REP	     11000
+Alyssa		     SA_REP	      8800
+Jonathon	     SA_REP	      8600
+Jack		     SA_REP	      8400
+Kimberely	     SA_REP	      7000
+Charles 	     SA_REP	      6200
+
+
+
+
+
+
+SQL> select first_name, job_id, salary from employees where (job_id='SA_REP' or job_id='AD_PRES') and salary>15000;
+
+FIRST_NAME	     JOB_ID	    SALARY
+-------------------- ---------- ----------
+Steven		     AD_PRES	     24000
+
+
+
+
+
+
+SQL> select first_name, job_id, salary from employees order by salary;
+
+FIRST_NAME	     JOB_ID	    SALARY
+-------------------- ---------- ----------
+TJ		     ST_CLERK	      2100
+Steven		     ST_CLERK	      2200
+Hazel		     ST_CLERK	      2200
+James		     ST_CLERK	      2400
+Ki		     ST_CLERK	      2400
+Karen		     PU_CLERK	      2500
+James		     ST_CLERK	      2500
+Joshua		     ST_CLERK	      2500
+Peter		     ST_CLERK	      2500
+Martha		     SH_CLERK	      2500
+Randall 	     SH_CLERK	      2500
+
+
+
+
+
+SQL> select first_name, job_id, salary from employees order by salary desc;
+
+FIRST_NAME	     JOB_ID	    SALARY
+-------------------- ---------- ----------
+Steven		     AD_PRES	     24000
+Neena		     AD_VP	     17000
+Lex		     AD_VP	     17000
+John		     SA_MAN	     14000
+Karen		     SA_MAN	     13500
+Michael 	     MK_MAN	     13000
+Nancy		     FI_MGR	     12008
+Shelley 	     AC_MGR	     12008
+Alberto 	     SA_MAN	     12000
+Lisa		     SA_REP	     11500
+Den		     PU_MAN	     11000
+
+
+
+
+
+
+SQL> select employee_id, first_name, salary * 12 "Annual Salary" from employees order by "Annual Salary";
+
+EMPLOYEE_ID FIRST_NAME		 Annual Salary
+----------- -------------------- -------------
+	132 TJ				 25200
+	128 Steven			 26400
+	136 Hazel			 26400
+	135 Ki				 28800
+	127 James			 28800
+	119 Karen			 30000
+	131 James			 30000
+	140 Joshua			 30000
+	144 Peter			 30000
+	182 Martha			 30000
+	191 Randall			 30000
+
+
+
+
+SQL> select sum(salary), avg(salary), min(salary), max(salary) from employees;
+
+SUM(SALARY) AVG(SALARY) MIN(SALARY) MAX(SALARY)
+----------- ----------- ----------- -----------
+     691416  6461.83178        2100	  24000
+
+
+
+
+
+
+
+
+
+SQL> select sum(salary) Total_Salary, avg(salary) Average_Salary, min(salary) Minimum_Salary, max(salary) "Maximum_Salary" from employees;
+
+TOTAL_SALARY AVERAGE_SALARY MINIMUM_SALARY Maximum_Salary
+------------ -------------- -------------- --------------
+      691416	 6461.83178	      2100	    24000
+
+
+
+
+
+
+
+SQL> select avg(commission_pct) from employees;
+
+AVG(COMMISSION_PCT)
+-------------------
+	 .222857143
+
+
+
+
+
+SQL> select avg(NVL(commission_pct,0)) from employees;
+
+AVG(NVL(COMMISSION_PCT,0))
+--------------------------
+		.072897196
+
+
+
+
+
+
+
+SQL> select count(country_id), region_id from countries group by region_id;
+
+COUNT(COUNTRY_ID)  REGION_ID
+----------------- ----------
+		8	   1
+		5	   2
+		6	   4
+		6	   3
+
+
+
+
+
+
+SQL>  select department_id, avg(salary) from employees group by department_id having avg(salary)>7000 order by department_id;
+
+DEPARTMENT_ID AVG(SALARY)
+------------- -----------
+	   20	     9500
+	   70	    10000
+	   80  8955.88235
+	   90  19333.3333
+	  100  8601.33333
+	  110	    10154
+
+
+
+
+
+
+
+
+
+
